@@ -37,7 +37,9 @@ const Card: React.FC<Props> = ({
             }}
           ></input>
         ) : (
-          <p onClick={() => setShowMenu(!showMenu)}>{card.text}</p>
+          <p className="header" onClick={() => setShowMenu(!showMenu)}>
+            {card.text}
+          </p>
         )}
         {card.children && (
           <div className="children_container">
@@ -64,6 +66,7 @@ const Card: React.FC<Props> = ({
             <div
               className="menu_item"
               onClick={() => {
+                if (cardWidth === 12) return;
                 setCardWidth(cardWidth + 1);
                 setShowMenu(false);
               }}
@@ -73,6 +76,7 @@ const Card: React.FC<Props> = ({
             <div
               className="menu_item"
               onClick={() => {
+                if (cardWidth === 1) return;
                 setCardWidth(cardWidth - 1);
                 setShowMenu(false);
               }}
