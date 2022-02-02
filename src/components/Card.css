@@ -1,0 +1,50 @@
+.card_container {
+  display: flex;
+}
+
+.card_container:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 0;
+}
+
+.card {
+  box-sizing: border-box;
+  border-width: 2px;
+  border-style: solid;
+  border-image: radial-gradient(rgba(238, 174, 202, 1), rgba(103, 155, 217, 1))
+    4;
+  padding: 10px;
+  border-radius: 30px;
+  height: 100px;
+}
+
+.input {
+  width: 100%;
+}
+
+.menu {
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.menu_item {
+  padding: 5px;
+}
+
+.menu_item:hover {
+  background-color: darkgray;
+}
+
+.children {
+  box-sizing: border-box;
+  border-width: 2px;
+  border-style: solid;
+  border-image: radial-gradient(rgba(238, 174, 202, 1), rgba(103, 155, 217, 1))
+    4;
+  padding: 10px;
+  border-radius: 30px;
+}

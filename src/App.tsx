@@ -1,58 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { ReactElement, useEffect } from "react";
+import { connect } from "react-redux";
+import { State } from "./redux/reducer";
+import * as actions from "./redux/actions";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+import Card from "./components/Card";
+interface Props {
+  cards: State;
+  deleteCard: Function;
+  changeText: Function;
+  moveDown: Function;
+  moveUp: Function;
+  addChildren: Function;
 }
 
-export default App;
+const App: React.FC<Props> = ({
+  cards,
+  deleteCard,
+  changeText,
+  moveDown,
+  moveUp,
+  addChildren,
+}): ReactElement => {
+  useEffect(() => {
+    console.log(cards);
+  }, []);
+  return (
+    <div className="container">
+      {cards.map((item) => (
+        <Card
+          card={item}
+          key={item.id}
+          changeText={changeText}
+          deleteCard={deleteCard}
+          moveDown={moveDown}
+          moveUp={moveUp}
+          addChildren={addChildren}
+        />
+      ))}
+    </div>
+  );
+};
+
+const mapState = (state: State) => {
+  return {
+    cards: state,
+  };
+};
+
+const mapDispatch = {
+  deleteCard: actions.deleteCard,
+  changeText: actions.changeText,
+  moveDown: actions.moveDown,
+  moveUp: actions.moveUp,
+  addChildren: actions.addChildren,
+};
+
+export default connect(mapState, mapDispatch)(App);
